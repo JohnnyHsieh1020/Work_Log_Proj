@@ -1,5 +1,5 @@
 # Flask_CRUD_3
-## Create a website for employees to record their own work logs.
+Create a website for employees to record their own work logs.
 
 ## Feature
 - Login
