@@ -45,5 +45,3 @@ def staff_list():
     else:
         return render_template('user/staff_list.html', user=current_user, data=get_all_staff)
 # ----------------------------------------------------------------------------
-
-
