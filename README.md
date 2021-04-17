@@ -1,7 +1,9 @@
 # Flask_CRUD_3
+
 Create a website for employees to record their own work logs.
 
 ## Feature
+
 - Login
 - Logout
 - Sign Up
@@ -12,8 +14,10 @@ Create a website for employees to record their own work logs.
 
 **Python Version :** 3.8.2  
 **IDE :** VSCode  
-**Requirements :**  
+**Requirements :**
+
 - Install [requirements](https://github.com/JohnnyHsieh1020/Flask_CRUD_3/blob/main/requirements.txt)
+
 ```
 pip3 install -r requirements.txt
 ```
@@ -26,11 +30,15 @@ pip3 install -r requirements.txt
 4. https://www.tutorialspoint.com/sqlalchemy/sqlalchemy_orm_working_with_joins.htm
 5. https://blog.csdn.net/u010591976/article/details/104253489
 6. https://blog.csdn.net/yilovexing/article/details/104708198
+
 ## DataBase
+
 Connect to PostgreSQL:
+
 ```
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://user_name:password@IP:PORT/db_name'
-``` 
+```
+
 1. Use SQLAlchemy to create a PostgreSQL database.
 2. Create User table, with 5 columns.
    - id(P-key)
@@ -43,7 +51,6 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://user_name:password@IP:PORT
    - id(P-key)
    - content
    - date
-   - start times
+   - start time
    - end time
    - user_id(F-key, ref to User-id)
-
