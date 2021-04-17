@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title%}Staff List{% endblock %}
+{% block content%}
+    <br /><h1 align="center">Staff List</h1>
+    <div class="search-container" align="right">
+        <form method="POST">
+          <input type="text" placeholder="Search Name.." name="search">
+          <button type="submit"><i class="fa fa-search"></i></button>
+        </form>
+    </div><br/>
+    <table align="center" id="staffList" border="2" style="width:100%">
+    <thead align="center">
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Identity</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for staff in data %}
+        <tr>
+            <td>{{ staff.name }}</td>
+            <td>{{ staff.email }}</td>
+            <td>{{ staff.identity }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    </table>
+{% endblock %}
