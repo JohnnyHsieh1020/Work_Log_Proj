@@ -46,15 +46,4 @@ def staff_list():
         return render_template('user/staff_list.html', user=current_user, data=get_all_staff)
 # ----------------------------------------------------------------------------
 
-# @views.route('/delete-note', methods=['POST'])
-# def del_note():
-#     note = json.loads(request.data)
-#     note_id = note['noteId']
-#     found = Note.query.get(note_id)
 
-#     if found:
-#         if found.user_id == current_user.id:
-#             db.session.delete(found)
-#             db.session.commit()
-
-#     return Jsonify({})
