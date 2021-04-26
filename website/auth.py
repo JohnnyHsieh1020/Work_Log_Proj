@@ -1,4 +1,4 @@
-# Create website route.
+# Create website route for Login, Sign up, Account and Logout.
 from flask import Blueprint, render_template, request, flash, redirect, url_for
 from .models import User
 from . import db
@@ -12,6 +12,7 @@ auth = Blueprint('auth', __name__)
 # Login Page -----------------------------------------------------------------
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
+    # If user click 'login' button
     if request.method == 'POST':
         email = request.form.get('email')
         password = request.form.get('password')
@@ -90,10 +91,11 @@ def account():
                 # Update data
                 found_user.name = name
                 db.session.commit()
-                
+
                 # Show message
                 flash('Saved!', category='success')
             elif len(pwd) < 5:
+                # Show message
                 flash('Password must be greater than 5 characters.',
                       category='error')
             else:
