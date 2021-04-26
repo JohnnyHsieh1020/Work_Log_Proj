@@ -1,0 +1,224 @@
+{% extends 'base.html' %} {% block title %}Work Log{% endblock %} {% block content %}
+<br />
+<h1 align="center">My Work Log</h1>
+
+<!--Create Log-->
+<form method="POST" align="center">
+    <div class="form-group" align="center">
+        <label for="date">Date:</label>
+        <input
+            type="date"
+            class="form-control"
+            name="date"
+            id="date"
+            max="{{maxDate}}"
+            style="width: 200px"
+            required
+        />
+    </div>
+    <div class="form-group" align="center">
+        <label for="time">Start Time:</label>
+        <input
+            type="time"
+            class="form-control"
+            name="startTime"
+            id="startTime"
+            min="09:00"
+            max="19:30"
+            style="width: 200px"
+            required
+        />
+    </div>
+    <div class="form-group" align="center">
+        <label for="time">End Time:</label>
+        <input
+            type="time"
+            class="form-control"
+            name="endTime"
+            id="endTime"
+            min="9:30"
+            max="20:00"
+            style="width: 200px"
+            required
+        />
+    </div>
+    <div class="form-group" align="center">
+        <label for="content">Content:</label><br />
+        <textarea
+            cols="50"
+            rows="5"
+            name="content"
+            id="content"
+            style="height: 200px"
+            placeholder="What did you do?"
+        ></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+<!-- Search -->
+<div class="search-container" align="right">
+    <form method="GET">
+        <input
+            type="text"
+            placeholder="Search Date...(Format:****-**-**)"
+            name="search"
+            size="30"
+        />
+        <button type="submit"><i class="fa fa-search"></i></button>
+    </form>
+</div>
+<br />
+
+<!-- View, Update and Delete -->
+<table align="center" id="staffList" border="2" style="width: 100%">
+    <thead align="center">
+        <tr>
+            <th>Date</th>
+            <th>Start time</th>
+            <th>End time</th>
+            <th>Content</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for log in data %}
+        <tr>
+            <td>{{ log.date }}</td>
+            <td>{{ log.start_time }}</td>
+            <td>{{ log.end_time }}</td>
+            <td>{{ log.content }}</td>
+
+            <!--Edit-->
+            <td align="center">
+                <button
+                    type="button"
+                    class="btn btn-success btn-sm"
+                    data-toggle="modal"
+                    data-target="#{{ log.id }}"
+                >
+                    <span class="fas">&#xf304;</span>
+                </button>
+            </td>
+
+            <!--Delete-->
+            <td align="center">
+                <button
+                    type="button"
+                    class="btn btn-danger btn-sm"
+                    onclick="delLog({{ log.id }})"
+                >
+                    <i class="fa fa-trash"></i>
+                </button>
+            </td>
+
+            <!-- Modal -->
+            <div
+                class="modal fade"
+                id="{{ log.id }}"
+                tabindex="-1"
+                role="dialog"
+                aria-labelledby="exampleModalCenterTitle"
+                aria-hidden="true"
+            >
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">
+                                Edit Work Log
+                            </h5>
+                        </div>
+
+                        <div class="modal-body" align="center">
+                            <form action="{{url_for('.edit_log')}}"method="POST" >
+                                <div class="form-group" align="center"></div>
+                                    <label for="id" align="center">Work Log ID:</label>
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        name="id"
+                                        id="id"
+                                        style="width: 55px; border: none; background:transparent;"
+                                        value="{{ log.id }}"
+                                        readonly
+                                    /> 
+                                </div>
+
+                                <div class="form-group" align="center">
+                                    <label for="date">Date:</label>
+                                    <input
+                                        type="date"
+                                        class="form-control"
+                                        name="editDate"
+                                        id="editDate"
+                                        max="{{maxDate}}"
+                                        style="width: 200px"
+                                        value="{{ log.date }}"
+                                    />
+                                </div>
+
+                                <div class="form-group" align="center">
+                                    <label for="time">Start Time:</label>
+                                    <input
+                                        type="time"
+                                        class="form-control"
+                                        name="editStartTime"
+                                        id="editStartTime"
+                                        min="09:00"
+                                        max="19:30"
+                                        style="width: 200px"
+                                        value="{{ log.start_time }}"
+                                        required
+                                    />
+                                </div>
+
+                                <div class="form-group" align="center">
+                                    <label for="time">End Time:</label>
+                                    <input
+                                        type="time"
+                                        class="form-control"
+                                        name="editEndTime"
+                                        id="editEndTime"
+                                        min="9:30"
+                                        max="20:00"
+                                        style="width: 200px"
+                                        value="{{ log.end_time }}"
+                                        required
+                                    />
+                                </div>
+
+                                <div class="form-group" align="center">
+                                    <label for="content">Content:</label><br />
+                                    <textarea
+                                        cols="50"
+                                        rows="5"
+                                        name="editContent"
+                                        id="editContent"
+                                        style="height: 200px"
+                                    >{{log.content}}</textarea>
+                                </div>
+
+                                <!-- Close & Save Changes-->
+                                <div class="modal-footer">
+                                    <button
+                                        type="button"
+                                        class="btn btn-secondary"
+                                        data-dismiss="modal"
+                                    >
+                                        Close
+                                    </button>
+                                    <button type="submit" class="btn btn-primary">
+                                        Save changes
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'base.html' %} {% block title%}Work Log{% endblock %} {%block content%}
+<br />
+<h1 align="center">Subordinates Work Log</h1>
+<div class="search-container" align="right">
+    <form method="POST">
+        <input type="text" placeholder="Search Name.." name="search" />
+        <button type="submit"><i class="fa fa-search"></i></button>
+    </form>
+</div>
+<br />
+<table align="center" id="staffList" border="2" style="width: 100%">
+    <thead align="center">
+        <tr>
+            <th>Date</th>
+            <th>Name</th>
+            <th>Start time</th>
+            <th>End time</th>
+            <th>Content</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for log in data %}
+        <tr>
+            <td>{{ log.WorkLog.date }}</td>
+            <td>{{ log.User.name }}</td>
+            <td>{{ log.WorkLog.start_time }}</td>
+            <td>{{ log.WorkLog.end_time }}</td>
+            <td>{{ log.WorkLog.content }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
