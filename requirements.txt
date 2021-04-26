@@ -2,4 +2,3 @@ Flask
 Flask-Login
 Flask-Migrate
 Flask-sqlalchemy
-Werkzeug
